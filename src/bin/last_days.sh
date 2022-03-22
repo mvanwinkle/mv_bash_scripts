@@ -41,6 +41,7 @@ shift
 
 last_days_start=${last_days_start:-$1}
 last_days_start=${last_days_start:-0}
+shift
 
 last_days_date_format="%Y-%m-%d-%H-%M-%S"
 last_days_dd_bs=${last_days_dd_bs:-1}
@@ -72,17 +73,23 @@ function generate_file_date
 	date -d "@$1" +"$last_days_date_format" 
 }
 
-for date in $( generate_epoch_seconds )
-do
-	file_date=$( generate_file_date "$date")
-	file_name=$( make_file_name "$file_date")
+function generate_files
+{
+	local date
+	for date in $( generate_epoch_seconds )
+	do
+		file_date=$( generate_file_date "$date")
+		file_name=$( make_file_name "$file_date")
 
 	# echo "$file_name"
-	dd status=none \
-		bs="$last_days_dd_bs" \
-		count="$last_days_dd_count" \
-		if="$last_days_dd_if" \
-		of="$file_name"
+		dd status=none \
+			bs="$last_days_dd_bs" \
+			count="$last_days_dd_count" \
+			if="$last_days_dd_if" \
+			of="$file_name"
 
-	touch --date "@$date" "$file_name"	
-done
+		touch --date "@$date" "$file_name"	
+	done
+}
+
+generate_files
