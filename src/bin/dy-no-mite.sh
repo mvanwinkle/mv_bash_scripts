@@ -14,9 +14,13 @@ all_arguments=( "$@" )
 
 for file_name in "${all_arguments[@]}"
 do
-	# printf "%s\n" "$file_name"
-
 	file_type=$( file -b "$file_name" | awk -F',' '{print $1}' )
+
+	if [[ -z ${dy_dispatch_control["$file_type","command"]} ]]
+	then
+		>&2 echo "Unhandled filetype $file_type for $file_name"
+		continue
+	fi
 	
 	# printf "File type: %s\n" "$file_type"
 
