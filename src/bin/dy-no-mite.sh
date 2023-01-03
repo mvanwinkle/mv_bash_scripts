@@ -28,7 +28,7 @@ do
 	while [ $i -ne $to ]
 	do
 		index="$file_type","argv",$i
-		argument=${dy_dispatch_control["$file_type","argv",$i]}
+		argument=${dy_dispatch_control[$index]}
 		append_me=$( printf "$argument" "$file_name" )
 		command_arguments+=("$append_me")
 		i=$(($i+1))
