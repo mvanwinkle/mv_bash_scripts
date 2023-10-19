@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# This is a (poorly written) wrapper to ffmpeg
 
 input_file="$1"; shift
 ratio=640
