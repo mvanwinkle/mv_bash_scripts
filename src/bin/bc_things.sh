@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# I needed a way to round things; bc does that
+# I believe I worked on other bash math stuff somewhere else
+# but left this as an example for doing things with bc
+
 function cheap_round
 {
 	local num="$1"; shift
