@@ -1,4 +1,6 @@
 #!/bin/bash
+
 # Uses jq to pretty print and colorize
 # uses less to display it with color
+
 jq -C "$@" | less -R
