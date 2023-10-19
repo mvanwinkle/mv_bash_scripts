@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# This is NOT the best way (now, at least) to
+# view DICOM files on Linux.
+#
+# The best way I've found is to use wine to run
+# the executables that come with the data disks
+# your provided.
+
 where="$1"; shift
 if [[ -z "$where" ]]
 then
