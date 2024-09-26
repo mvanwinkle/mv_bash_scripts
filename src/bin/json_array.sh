@@ -1,7 +1,5 @@
 #!/bin/bash
 
-input_file='blah.json'
-
 function create_array_from_json_string
 {
 	local -n arr="$1" ; shift
