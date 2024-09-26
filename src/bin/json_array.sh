@@ -9,6 +9,8 @@ function create_array_from_json_string
 
 	# printf "Json string: %s\n" "$json_string"
 
+	local entry
+
 	for entry in $( printf "%s" "$json_string" | jq -c '.[]' )
 	do
 		arr+=( $(printf "%s" "$entry" | jq --raw-output ) )
@@ -30,6 +32,8 @@ function create_associative_array_from_json_string
 	local key
 
 	local count=0
+
+	local entry
 	for entry in $( printf "%s" "$json_string" | jq 'to_entries[] | .key, .value' )
 	do
 		if [[ $((count%2)) == 0 ]]
@@ -53,6 +57,6 @@ function test_associative_array
 	declare -p the_associative_array
 }
 
-# test_array
+test_array
 
 test_associative_array
