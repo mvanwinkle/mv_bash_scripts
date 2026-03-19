@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Switches between kerberos principals
+# by grep pattern
+
+grep_for="$1" ; shift
+
+if [[ -z "$grep_for" ]]
+then
+	>&2 printf "First argument is princ to look for...\n"
+	exit 1
+fi
+princs=$( klist -A | grep 'Default principal:' | awk -F'Default principal: ' '{print $2}' | grep "$grep_for" )
+
+line_count=$( printf "%s\n" "$princs" | wc -l )
+
+# printf "Line count: $line_count\n"
+
+if [[ "$line_count" != 1 ]]
+then
+	>&2 printf "$line_count results found...\n"
+	printf "$princs\n"
+	exit 1
+fi
+
+kswitch -p "$princs"

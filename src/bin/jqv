@@ -7,7 +7,7 @@ i=0
 while read -r line
 do
 	i=$((i+1))
-	printf -- "%s\n" "$line" | jq -c . || >&2 printf "Bad JSON line $i: $line\n"
+	printf -- "%s\n" "$line" | jq -Mc . || >&2 printf "Bad JSON line $i: $line\n"
 
 done
 
